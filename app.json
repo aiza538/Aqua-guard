@@ -32,6 +32,13 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "AquaGuard needs access to your photos to scan plant leaves.",
+          "cameraPermission": "AquaGuard needs camera access to capture leaf photos for disease detection."
+        }
       ]
     ],
     "experiments": {

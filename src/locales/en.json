@@ -1,0 +1,19 @@
+{
+  "welcome": "Welcome back",
+  "login": "Login",
+  "phone_number": "Phone Number",
+  "password": "Password",
+  "sign_up_prompt": "Don't have an account? Sign Up",
+  "dashboard": "Dashboard",
+  "soil_moisture": "Soil Moisture",
+  "temperature": "Temperature",
+  "humidity": "Humidity",
+  "water_level": "Water Level",
+  "irrigation_control": "Irrigation Control",
+  "drip_irrigation": "Drip Irrigation",
+  "sprinkler_system": "Sprinkler System",
+  "scan_disease": "Scan Plant Disease",
+  "capture_leaf": "Capture Leaf Photo",
+  "diagnosis_result": "Diagnosis Result",
+  "recommended_treatment": "Recommended Treatment"
+}

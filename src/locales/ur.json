@@ -1,0 +1,19 @@
+{
+  "welcome": "خوش آمدید",
+  "login": "لاگ ان",
+  "phone_number": "فون نمبر",
+  "password": "پاس ورڈ",
+  "sign_up_prompt": "اکاؤنٹ نہیں ہے؟ سائن اپ کریں",
+  "dashboard": "ڈیش بورڈ",
+  "soil_moisture": "مٹی کی نمی",
+  "temperature": "درجہ حرارت",
+  "humidity": "نمی",
+  "water_level": "پانی کی سطح",
+  "irrigation_control": "آبپاشی کنٹرول",
+  "drip_irrigation": "ڈرپ آبپاشی",
+  "sprinkler_system": "سپرینکلر سسٹم",
+  "scan_disease": "پودے کی بیماری اسکین کریں",
+  "capture_leaf": "پتے کی تصویر لیں",
+  "diagnosis_result": "تشخیص کا نتیجہ",
+  "recommended_treatment": "تجویز کردہ علاج"
+}
