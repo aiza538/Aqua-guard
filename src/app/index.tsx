@@ -34,6 +34,17 @@ export default function LoginScreen() {
     router.push('/dashboard');
   };
 
+  const handleForgotPassword = () => {
+    setError('');
+
+    if (!phone.trim()) {
+      setError(t('fill_phone_first'));
+      return;
+    }
+
+    router.push('/forgotPassword');
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -51,14 +62,14 @@ export default function LoginScreen() {
           <View style={styles.logoCircle}>
             <Text style={styles.logoIcon}>💧</Text>
           </View>
-          <Text style={styles.appName}>AquaGuard</Text>
-          <Text style={styles.tagline}>Smart Irrigation for Every Farmer</Text>
+          <Text style={styles.appName}>{t('app_name')}</Text>
+          <Text style={styles.tagline}>{t('app_tagline')}</Text>
         </LinearGradient>
 
         <SafeAreaView style={styles.formSection}>
           <View style={styles.formCard}>
             <Text style={styles.welcomeText}>{t('welcome')} 👋</Text>
-            <Text style={styles.subText}>Login to manage your farm</Text>
+            <Text style={styles.subText}>{t('login_subtitle')}</Text>
 
             {error ? (
               <View style={styles.errorBox}>
@@ -94,9 +105,9 @@ export default function LoginScreen() {
 
             <TouchableOpacity
               style={styles.forgotWrapper}
-              onPress={() => router.push('/forgotPassword')}
+              onPress={handleForgotPassword}
             >
-              <Text style={styles.forgotText}>Forgot Password?</Text>
+              <Text style={styles.forgotText}>{t('forgot_password')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -116,13 +127,13 @@ export default function LoginScreen() {
 
             <View style={styles.dividerRow}>
               <View style={styles.dividerLine} />
-              <Text style={styles.dividerText}>or</Text>
+              <Text style={styles.dividerText}>{t('or')}</Text>
               <View style={styles.dividerLine} />
             </View>
 
             <TouchableOpacity onPress={() => router.push('/signup')}>
               <Text style={styles.signupText}>
-                Don't have an account? <Text style={styles.signupBold}>Sign Up</Text>
+                {t('no_account')} <Text style={styles.signupBold}>{t('sign_up')}</Text>
               </Text>
             </TouchableOpacity>
           </View>

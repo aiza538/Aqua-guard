@@ -1,19 +1,68 @@
 {
+  "app_name": "ایکوا گارڈ",
+  "app_tagline": "ہر کسان کے لیے سمارٹ آبپاشی",
+
   "welcome": "خوش آمدید",
   "login": "لاگ ان",
+  "login_subtitle": "اپنے فارم کا نظم کرنے کے لیے لاگ ان کریں",
   "phone_number": "فون نمبر",
   "password": "پاس ورڈ",
+  "forgot_password": "پاس ورڈ بھول گئے؟",
+  "or": "یا",
+  "no_account": "اکاؤنٹ نہیں ہے؟",
+  "fill_phone_first": "پہلے اپنا فون نمبر درج کریں۔",
+  "sign_up": "سائن اپ",
   "sign_up_prompt": "اکاؤنٹ نہیں ہے؟ سائن اپ کریں",
+
+  "create_account": "اکاؤنٹ بنائیں",
+  "join_today": "آج ہی AquaGuard میں شامل ہوں",
+  "full_name": "پورا نام",
+  "have_account": "پہلے سے اکاؤنٹ ہے؟",
+
+  "reset_password": "پاس ورڈ ری سیٹ کریں",
+  "reset_subtitle": "ہم آپ کو ری سیٹ کوڈ بھیجیں گے",
+  "send_reset_code": "ری سیٹ کوڈ بھیجیں",
+  "code_sent": "کوڈ بھیج دیا گیا!",
+  "code_sent_message": "ری سیٹ کوڈ اس نمبر پر بھیجا گیا ہے",
+  "back_to_login": "لاگ ان پر واپس جائیں",
+
   "dashboard": "ڈیش بورڈ",
+  "farm_name": "گرین ویلی فارم",
+  "weather_status": "دھوپ · آبپاشی کے لیے اچھا دن",
   "soil_moisture": "مٹی کی نمی",
   "temperature": "درجہ حرارت",
   "humidity": "نمی",
   "water_level": "پانی کی سطح",
+
   "irrigation_control": "آبپاشی کنٹرول",
   "drip_irrigation": "ڈرپ آبپاشی",
   "sprinkler_system": "سپرینکلر سسٹم",
+  "running": "چل رہا ہے",
+  "stopped": "بند ہے",
+
+  "quick_actions": "فوری اقدامات",
+  "advanced_settings": "ایڈوانسڈ آبپاشی سیٹنگز",
+  "advanced_settings_subtitle": "شیڈول، خودکار اور بہتر بنائیں",
   "scan_disease": "پودے کی بیماری اسکین کریں",
+  "scan_disease_subtitle": "پتے کی تصویر لیں",
+
+  "automation_mode": "خودکار موڈ",
+  "auto_mode": "خودکار (سینسر پر مبنی)",
+  "manual_controls": "دستی کنٹرول",
+  "schedule": "شیڈول",
+  "morning_schedule": "صبح — 6:00 (15 منٹ)",
+  "evening_schedule": "شام — 6:30 (10 منٹ)",
+  "save_settings": "سیٹنگز محفوظ کریں",
+
+  "disease_scanner_title": "بیماری اسکینر",
+  "no_image_selected": "کوئی تصویر منتخب نہیں کی گئی",
+  "take_photo": "تصویر لیں",
   "capture_leaf": "پتے کی تصویر لیں",
+  "gallery": "گیلری",
+  "analyzing": "AI سے پتے کا تجزیہ ہو رہا ہے...",
   "diagnosis_result": "تشخیص کا نتیجہ",
-  "recommended_treatment": "تجویز کردہ علاج"
+  "confidence": "اعتماد",
+  "recommended_treatment": "تجویز کردہ علاج",
+
+  "logout": "لاگ آؤٹ"
 }

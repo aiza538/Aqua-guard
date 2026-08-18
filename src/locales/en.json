@@ -1,19 +1,68 @@
 {
+  "app_name": "AquaGuard",
+  "app_tagline": "Smart Irrigation for Every Farmer",
+
   "welcome": "Welcome back",
   "login": "Login",
+  "login_subtitle": "Login to manage your farm",
   "phone_number": "Phone Number",
   "password": "Password",
+  "forgot_password": "Forgot Password?",
+  "fill_phone_first": "Please enter your phone number first.",
+  "or": "or",
+  "no_account": "Don't have an account?",
+  "sign_up": "Sign Up",
   "sign_up_prompt": "Don't have an account? Sign Up",
+
+  "create_account": "Create Account",
+  "join_today": "Join AquaGuard today",
+  "full_name": "Full Name",
+  "have_account": "Already have an account?",
+
+  "reset_password": "Reset Password",
+  "reset_subtitle": "We'll send you a reset code",
+  "send_reset_code": "Send Reset Code",
+  "code_sent": "Code Sent!",
+  "code_sent_message": "A reset code has been sent to",
+  "back_to_login": "Back to Login",
+
   "dashboard": "Dashboard",
+  "farm_name": "Green Valley Farm",
+  "weather_status": "Sunny · Good day for irrigation",
   "soil_moisture": "Soil Moisture",
   "temperature": "Temperature",
   "humidity": "Humidity",
   "water_level": "Water Level",
+
   "irrigation_control": "Irrigation Control",
   "drip_irrigation": "Drip Irrigation",
   "sprinkler_system": "Sprinkler System",
+  "running": "Running",
+  "stopped": "Stopped",
+
+  "quick_actions": "Quick Actions",
+  "advanced_settings": "Advanced Irrigation Settings",
+  "advanced_settings_subtitle": "Schedule, automate & fine-tune",
   "scan_disease": "Scan Plant Disease",
+  "scan_disease_subtitle": "Take a photo of the leaf",
+
+  "automation_mode": "Automation Mode",
+  "auto_mode": "Auto (Sensor-based)",
+  "manual_controls": "Manual Controls",
+  "schedule": "Schedule",
+  "morning_schedule": "Morning — 6:00 AM (15 mins)",
+  "evening_schedule": "Evening — 6:30 PM (10 mins)",
+  "save_settings": "Save Settings",
+
+  "disease_scanner_title": "Disease Scanner",
+  "no_image_selected": "No image selected",
+  "take_photo": "Take Photo",
   "capture_leaf": "Capture Leaf Photo",
+  "gallery": "Gallery",
+  "analyzing": "Analyzing leaf with AI...",
   "diagnosis_result": "Diagnosis Result",
-  "recommended_treatment": "Recommended Treatment"
+  "confidence": "Confidence",
+  "recommended_treatment": "Recommended Treatment",
+
+  "logout": "Logout"
 }

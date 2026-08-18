@@ -9,7 +9,8 @@ import { Colors } from '../constants/theme';
 
 export default function DashboardScreen() {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isUrdu = i18n.language === 'ur';
   const [dripOn, setDripOn] = useState(false);
   const [sprinklerOn, setSprinklerOn] = useState(false);
 
@@ -20,10 +21,12 @@ export default function DashboardScreen() {
           colors={['#0d3b2e', '#1b5e42']}
           style={styles.headerCard}
         >
-          <Text style={styles.greeting}>{t('welcome')} 👋</Text>
-          <Text style={styles.farmName}>Green Valley Farm</Text>
+          <Text style={[styles.greeting, isUrdu && styles.textRight]}>{t('welcome')} 👋</Text>
+          <Text style={[styles.farmName, isUrdu && styles.textRight]}>{t('farm_name')}</Text>
           <View style={styles.weatherRow}>
-            <Text style={styles.weatherText}>☀️ 29°C · Sunny · Good day for irrigation</Text>
+            <Text style={[styles.weatherText, isUrdu && styles.textRight]}>
+              ☀️ 29°C · {t('weather_status')}
+            </Text>
           </View>
         </LinearGradient>
 
@@ -34,11 +37,11 @@ export default function DashboardScreen() {
           <SensorGauge label={t('water_level')} value="78" unit="%" icon="🚰" />
         </View>
 
-        <Text style={styles.sectionTitle}>{t('irrigation_control')}</Text>
+        <Text style={[styles.sectionTitle, isUrdu && styles.textRight]}>{t('irrigation_control')}</Text>
         <ValveToggleButton label={t('drip_irrigation')} value={dripOn} onToggle={setDripOn} />
         <ValveToggleButton label={t('sprinkler_system')} value={sprinklerOn} onToggle={setSprinklerOn} />
 
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
+        <Text style={[styles.sectionTitle, isUrdu && styles.textRight]}>{t('quick_actions')}</Text>
 
         <TouchableOpacity
           style={styles.actionCard}
@@ -49,8 +52,8 @@ export default function DashboardScreen() {
             <Text style={styles.actionIcon}>⚙️</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.actionTitle}>Advanced Irrigation Settings</Text>
-            <Text style={styles.actionSubtitle}>Schedule, automate & fine-tune</Text>
+            <Text style={[styles.actionTitle, isUrdu && styles.textRight]}>{t('advanced_settings')}</Text>
+            <Text style={[styles.actionSubtitle, isUrdu && styles.textRight]}>{t('advanced_settings_subtitle')}</Text>
           </View>
           <Text style={styles.arrow}>›</Text>
         </TouchableOpacity>
@@ -64,8 +67,8 @@ export default function DashboardScreen() {
             <Text style={styles.actionIcon}>🔬</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.actionTitle}>{t('scan_disease')}</Text>
-            <Text style={styles.actionSubtitle}>Take a photo of the leaf</Text>
+            <Text style={[styles.actionTitle, isUrdu && styles.textRight]}>{t('scan_disease')}</Text>
+            <Text style={[styles.actionSubtitle, isUrdu && styles.textRight]}>{t('scan_disease_subtitle')}</Text>
           </View>
           <Text style={styles.arrow}>›</Text>
         </TouchableOpacity>
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
   farmName: { fontSize: 24, fontWeight: '800', color: Colors.white, marginTop: 4 },
   weatherRow: { marginTop: 14 },
   weatherText: { fontSize: 12, color: 'rgba(255,255,255,0.9)' },
+  textRight: { textAlign: 'right' },
   gaugeRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
