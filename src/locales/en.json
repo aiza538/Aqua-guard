@@ -64,5 +64,59 @@
   "confidence": "Confidence",
   "recommended_treatment": "Recommended Treatment",
 
-  "logout": "Logout"
+  "logout": "Logout",
+
+  "smart_irrigation_prediction": "Smart Irrigation Prediction",
+  "district": "District",
+  "soil_type": "Soil Type",
+  "crop_type": "Crop Type",
+  "soil_ph": "Soil pH",
+  "rainfall_mm": "Rainfall (mm)",
+  "moisture_percent": "Moisture %",
+  "land_area_acres": "Land Area (Acres)",
+  "get_prediction": "Get Prediction",
+
+  "districts": {
+    "khairpur": "Khairpur",
+    "sukkur": "Sukkur",
+    "multan": "Multan",
+    "bahawalpur": "Bahawalpur",
+    "mardan": "Mardan",
+    "charsadda": "Charsadda",
+    "di_khan": "DI Khan",
+    "swat": "Swat"
+  },
+
+  "soil_types": {
+    "peaty": "Peaty",
+    "clay": "Clay",
+    "sandy": "Sandy",
+    "loamy": "Loamy",
+    "silty": "Silty"
+  },
+
+  "crop_types": {
+    "wheat": "Wheat",
+    "rice": "Rice",
+    "cotton": "Cotton",
+    "sugarcane": "Sugarcane",
+    "maize": "Maize",
+    "vegetables": "Vegetables",
+    "other": "Other"
+  },
+
+  "irrigation_status": {
+    "auto": "Auto (Sensor-based)",
+    "manual": "Manual Controls",
+    "drip": "Drip Irrigation",
+    "sprinkler": "Sprinkler System",
+    "running": "Running",
+    "stopped": "Stopped"
+  },
+
+  "prediction_results": "Prediction Results",
+  "water_requirement": "Water Requirement",
+  "irrigation_schedule": "Irrigation Schedule",
+  "fertilizer_recommendation": "Fertilizer Recommendation",
+  "estimated_yield": "Estimated Yield"
 }

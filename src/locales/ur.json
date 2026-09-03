@@ -64,5 +64,59 @@
   "confidence": "اعتماد",
   "recommended_treatment": "تجویز کردہ علاج",
 
-  "logout": "لاگ آؤٹ"
+  "logout": "لاگ آؤٹ",
+
+  "smart_irrigation_prediction": "سمارٹ آبپاشی کی پیش گوئی",
+  "district": "ضلع",
+  "soil_type": "مٹی کی قسم",
+  "crop_type": "فصل کی قسم",
+  "soil_ph": "مٹی کا پی ایچ",
+  "rainfall_mm": "بارش (ملی میٹر)",
+  "moisture_percent": "نمی فیصد",
+  "land_area_acres": "رقبہ (ایکڑ)",
+  "get_prediction": "پیش گوئی حاصل کریں",
+
+  "districts": {
+    "khairpur": "خیرپور",
+    "sukkur": "سکھر",
+    "multan": "ملتان",
+    "bahawalpur": "بہاولپور",
+    "mardan": "مردان",
+    "charsadda": "چارسدہ",
+    "di_khan": "ڈی آئی خان",
+    "swat": "سوات"
+  },
+
+  "soil_types": {
+    "peaty": "پیٹی (دلدلی)",
+    "clay": "چکنی مٹی",
+    "sandy": "ریتیلی مٹی",
+    "loamy": "دومتی مٹی",
+    "silty": "گاد دار مٹی"
+  },
+
+  "crop_types": {
+    "wheat": "گندم",
+    "rice": "چاول",
+    "cotton": "کپاس",
+    "sugarcane": "گنا",
+    "maize": "مکئی",
+    "vegetables": "سبزیاں",
+    "other": "دیگر"
+  },
+
+  "irrigation_status": {
+    "auto": "خودکار (سینسر پر مبنی)",
+    "manual": "دستی کنٹرول",
+    "drip": "ڈرپ آبپاشی",
+    "sprinkler": "سپرینکلر سسٹم",
+    "running": "چل رہا ہے",
+    "stopped": "بند ہے"
+  },
+
+  "prediction_results": "پیش گوئی کے نتائج",
+  "water_requirement": "پانی کی ضرورت",
+  "irrigation_schedule": "آبپاشی کا شیڈول",
+  "fertilizer_recommendation": "کھاد کی سفارش",
+  "estimated_yield": "متوقع پیداوار"
 }

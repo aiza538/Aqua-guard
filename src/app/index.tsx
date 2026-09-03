@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Colors } from '../constants/theme';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { login as loginApi } from '../api/authApi';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -12,8 +14,9 @@ export default function LoginScreen() {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setError('');
 
     if (!phone.trim() || !password.trim()) {
@@ -31,7 +34,17 @@ export default function LoginScreen() {
       return;
     }
 
-    router.push('/dashboard');
+    setLoading(true);
+    try {
+      const data = await loginApi(phone.trim(), password);
+      await AsyncStorage.setItem('authToken', data.access_token);
+      await AsyncStorage.setItem('userData', JSON.stringify(data.user));
+      router.push('/dashboard');
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Login failed. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = () => {
@@ -114,6 +127,7 @@ export default function LoginScreen() {
               style={styles.loginButton}
               activeOpacity={0.85}
               onPress={handleLogin}
+              disabled={loading}
             >
               <LinearGradient
                 colors={['#1b5e42', '#0d3b2e']}
@@ -121,7 +135,11 @@ export default function LoginScreen() {
                 end={{ x: 1, y: 0 }}
                 style={styles.loginGradient}
               >
-                <Text style={styles.loginButtonText}>{t('login')}</Text>
+                {loading ? (
+                  <ActivityIndicator color={Colors.white} />
+                ) : (
+                  <Text style={styles.loginButtonText}>{t('login')}</Text>
+                )}
               </LinearGradient>
             </TouchableOpacity>
 
