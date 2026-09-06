@@ -31,7 +31,7 @@ def signup():
     db.session.add(user)
     db.session.commit()
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
 
     return jsonify({
         'message': 'Account created successfully.',
@@ -55,7 +55,7 @@ def login():
     if not user or not user.check_password(password):
         return jsonify({'error': 'Invalid phone number or password.'}), 401
 
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
 
     return jsonify({
         'message': 'Login successful.',
@@ -83,7 +83,7 @@ def forgot_password():
 @auth_bp.route('/language', methods=['POST'])
 @jwt_required()
 def update_language():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     data = request.get_json()
     language = data.get('language')
 
@@ -106,7 +106,7 @@ def update_language():
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()
 def get_current_user():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     user = User.query.get(user_id)
 
     if not user:

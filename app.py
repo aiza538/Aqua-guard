@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from config import Config
 from models.user import db
 from routes.auth_routes import auth_bp
+from routes.irrigation_routes import irrigation_bp
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +15,7 @@ def create_app():
     JWTManager(app)
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(irrigation_bp)
 
     with app.app_context():
         db.create_all()
