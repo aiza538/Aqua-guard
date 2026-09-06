@@ -118,5 +118,16 @@
   "water_requirement": "پانی کی ضرورت",
   "irrigation_schedule": "آبپاشی کا شیڈول",
   "fertilizer_recommendation": "کھاد کی سفارش",
-  "estimated_yield": "متوقع پیداوار"
+  "estimated_yield": "متوقع پیداوار",
+  "gps_auto_detect": "خودکار پتہ لگائیں (GPS + موسم)",
+  "crop_name": "فصل کا نام",
+  "field_area_acres": "کھیت کا رقبہ (ایکڑ)",
+  "upload_crop_photo": "فصل کی تصویر اپلوڈ کریں (اختیاری)",
+  "photo_captured": "تصویر لے لی گئی",
+  "auto_detect_predict": "خودکار پتہ لگائیں اور پیش گوئی کریں",
+  "estimated_for": "کے لیے تخمینہ",
+  "camera_permission_required": "کیمرہ کی اجازت درکار ہے۔",
+  "crop_area_required": "براہ کرم فصل کا نام اور رقبہ درج کریں۔",
+  "location_permission_required": "آپ کے کھیت کی صورتحال معلوم کرنے کے لیے مقام کی اجازت درکار ہے۔",
+  "location_fetch_failed": "آپ کا مقام معلوم نہیں ہو سکا۔ براہ کرم GPS آن کریں اور دوبارہ کوشش کریں۔"
 }

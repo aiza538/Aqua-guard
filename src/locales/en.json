@@ -118,5 +118,16 @@
   "water_requirement": "Water Requirement",
   "irrigation_schedule": "Irrigation Schedule",
   "fertilizer_recommendation": "Fertilizer Recommendation",
-  "estimated_yield": "Estimated Yield"
+  "estimated_yield": "Estimated Yield",
+  "gps_auto_detect": "Auto-Detect (GPS + Weather)",
+  "crop_name": "Crop Name",
+  "field_area_acres": "Field Area (Acres)",
+  "upload_crop_photo": "Upload Crop Photo (Optional)",
+  "photo_captured": "Photo Captured",
+  "auto_detect_predict": "Auto-Detect & Predict",
+  "estimated_for": "Estimated for",
+  "camera_permission_required": "Camera permission is required.",
+  "crop_area_required": "Please enter crop name and field area.",
+  "location_permission_required": "Location permission is required to auto-detect your field conditions.",
+  "location_fetch_failed": "Could not get your location. Please enable GPS and try again."
 }

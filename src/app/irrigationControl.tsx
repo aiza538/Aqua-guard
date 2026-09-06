@@ -2,11 +2,12 @@ import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Tex
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '../constants/theme';
 import ValveToggleButton from '../components/ValveToggleButton';
-import { getDistrictsAndSoilTypes, predictIrrigation } from '../api/irrigationApi';
+import { getDistrictsAndSoilTypes, predictIrrigation, predictIrrigationAuto } from '../api/irrigationApi';
 
-// Backend se aane wale raw naam (jaise "DI Khan") ko JSON key ("di_khan") mein convert karta hai
 const toKey = (str: string) =>
   str
     .toLowerCase()
@@ -20,6 +21,7 @@ export default function IrrigationControlScreen() {
   const [drip, setDrip] = useState(false);
   const [sprinkler, setSprinkler] = useState(false);
 
+  // Manual prediction state
   const [districts, setDistricts] = useState<string[]>([]);
   const [soilTypes, setSoilTypes] = useState<string[]>([]);
   const [cropTypes, setCropTypes] = useState<string[]>([]);
@@ -43,6 +45,14 @@ export default function IrrigationControlScreen() {
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // GPS Auto-Detect state
+  const [autoCropName, setAutoCropName] = useState('');
+  const [autoAreaAcres, setAutoAreaAcres] = useState('');
+  const [cropImage, setCropImage] = useState<string | null>(null);
+  const [autoLoading, setAutoLoading] = useState(false);
+  const [autoResult, setAutoResult] = useState<any>(null);
+  const [autoError, setAutoError] = useState('');
 
   useEffect(() => {
     getDistrictsAndSoilTypes()
@@ -86,6 +96,85 @@ export default function IrrigationControlScreen() {
     }
   };
 
+  const pickCropImage = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      setAutoError(t('camera_permission_required'));
+      return;
+    }
+    const pickerResult = await ImagePicker.launchCameraAsync({ quality: 0.6 });
+    if (!pickerResult.canceled && pickerResult.assets?.[0]) {
+      setCropImage(pickerResult.assets[0].uri);
+    }
+  };
+
+  const handleAutoPredict = async () => {
+    setAutoError('');
+    setAutoResult(null);
+
+    // Crop name ab optional hai AGAR photo upload ki gayi ho — AI usse detect kar lega.
+    // Dono missing hon tabhi error dikhayenge.
+    if (!autoCropName.trim() && !cropImage) {
+      setAutoError(t('crop_area_required'));
+      return;
+    }
+    if (!autoAreaAcres.trim()) {
+      setAutoError(t('crop_area_required'));
+      return;
+    }
+
+    setAutoLoading(true);
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setAutoError(t('location_permission_required'));
+        setAutoLoading(false);
+        return;
+      }
+
+      const position = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+      const { latitude, longitude } = position.coords;
+
+      const formData = new FormData();
+      formData.append('latitude', String(latitude));
+      formData.append('longitude', String(longitude));
+      formData.append('crop_name', autoCropName.trim());
+      formData.append('area_acres', autoAreaAcres.trim());
+
+      if (cropImage) {
+        formData.append('image', {
+          uri: cropImage,
+          name: 'crop.jpg',
+          type: 'image/jpeg',
+        } as any);
+      }
+
+      const token = await AsyncStorage.getItem('authToken');
+      const data = await predictIrrigationAuto(formData, token);
+      console.log('AUTO RESULT:', JSON.stringify(data));
+
+      // Zaroori — agar backend ne error field bheja hai (jaise "too far from supported region"),
+      // usay result ki jagah error ki tarah dikhayein
+      if (data.error) {
+        setAutoError(data.error);
+        setAutoLoading(false);
+        return;
+      }
+
+      setAutoResult(data);
+    } catch (err: any) {
+      if (err.message?.toLowerCase().includes('location')) {
+        setAutoError(t('location_fetch_failed'));
+      } else {
+        setAutoError(err.response?.data?.error || 'Prediction failed. Please try again.');
+      }
+    } finally {
+      setAutoLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -98,7 +187,92 @@ export default function IrrigationControlScreen() {
         <ValveToggleButton label={t('drip_irrigation')} value={drip} onToggle={setDrip} />
         <ValveToggleButton label={t('sprinkler_system')} value={sprinkler} onToggle={setSprinkler} />
 
-        <Text style={styles.sectionTitle}>{t('smart_irrigation_prediction')}</Text>
+        {/* GPS + Weather Auto-Detect Section */}
+        <Text style={styles.sectionTitle}>📍 {t('gps_auto_detect')}</Text>
+        <View style={styles.predictCard}>
+          <Text style={styles.fieldLabel}>{t('crop_name')}</Text>
+          <TextInput
+            style={styles.numInput}
+            placeholder="e.g. Wheat (optional if you upload a photo)"
+            value={autoCropName}
+            onChangeText={setAutoCropName}
+          />
+
+          <Text style={styles.fieldLabel}>{t('field_area_acres')}</Text>
+          <TextInput
+            style={styles.numInput}
+            placeholder="e.g. 2.5"
+            keyboardType="decimal-pad"
+            value={autoAreaAcres}
+            onChangeText={setAutoAreaAcres}
+          />
+
+          <TouchableOpacity style={styles.galleryButton} onPress={pickCropImage}>
+            <Text style={styles.galleryButtonText}>
+              {cropImage ? `✅ ${t('photo_captured')}` : `📷 ${t('upload_crop_photo')}`}
+            </Text>
+          </TouchableOpacity>
+
+          {autoError ? <Text style={styles.errorText}>⚠️ {autoError}</Text> : null}
+
+          <TouchableOpacity style={styles.predictButton} onPress={handleAutoPredict} disabled={autoLoading}>
+            {autoLoading ? (
+              <ActivityIndicator color={Colors.white} />
+            ) : (
+              <Text style={styles.predictButtonText}>📍 {t('auto_detect_predict')}</Text>
+            )}
+          </TouchableOpacity>
+
+          {autoResult && !autoResult.error && (
+            <View style={styles.resultBox}>
+              <Text style={styles.resultLiters}>
+                {autoResult.total_liters_required?.toLocaleString()} L
+              </Text>
+              <Text style={styles.resultLabel}>{t('estimated_for')} {autoResult.detected_district}</Text>
+
+              <View style={[styles.badge, { backgroundColor: autoResult.needs_water ? '#fdecea' : '#e3f2ea' }]}>
+                <Text style={[styles.badgeText, { color: autoResult.needs_water ? Colors.danger : Colors.secondary }]}>
+                  {autoResult.needs_water ? '💧 Needs Water' : '✅ No Water Needed'}
+                </Text>
+              </View>
+
+              {/* NEW: AI ne photo se crop detect kiya ho to yeh dikhta hai */}
+              {autoResult.crop_detected_from_photo ? (
+                <View style={styles.aiDetectedBox}>
+                  <Text style={styles.aiDetectedText}>
+                    🤖 {t('ai_detected_crop', { defaultValue: 'AI Detected' })}: {autoResult.crop_name}
+                    {' '}({autoResult.detection_confidence}% {t('confidence', { defaultValue: 'confidence' })})
+                  </Text>
+                </View>
+              ) : autoResult.crop_name ? (
+                <View style={styles.breakdownRow}>
+                  <Text style={styles.breakdownText}>🌾 {autoResult.crop_name}</Text>
+                  {autoResult.kc_factor ? (
+                    <Text style={styles.breakdownText}>Kc: {autoResult.kc_factor}</Text>
+                  ) : null}
+                </View>
+              ) : null}
+
+              <View style={styles.breakdownRow}>
+                <Text style={styles.breakdownText}>🌦️ {autoResult.rainfall_mm}mm rain</Text>
+                <Text style={styles.breakdownText}>💧 {autoResult.humidity}% humidity</Text>
+                <Text style={styles.breakdownText}>🌱 {autoResult.soil_type_estimated}</Text>
+              </View>
+
+              {autoResult.water_source_note ? (
+                <View style={styles.waterSourceBox}>
+                  <Text style={styles.waterSourceIcon}>
+                    {autoResult.canal_access === 'Yes' ? '🚰' : '⚠️'}
+                  </Text>
+                  <Text style={styles.waterSourceText}>{autoResult.water_source_note}</Text>
+                </View>
+              ) : null}
+            </View>
+          )}
+        </View>
+
+        {/* Manual Prediction Section */}
+        <Text style={styles.sectionTitle}>{t('smart_irrigation_prediction')} (Manual)</Text>
         <View style={styles.predictCard}>
           <Text style={styles.fieldLabel}>{t('district')}</Text>
           <View style={styles.chipRow}>
@@ -305,6 +479,16 @@ const styles = StyleSheet.create({
     marginTop: 18,
   },
   predictButtonText: { color: Colors.white, fontWeight: '600', fontSize: 14 },
+  galleryButton: {
+    backgroundColor: Colors.card,
+    borderRadius: 10,
+    paddingVertical: 13,
+    alignItems: 'center',
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: Colors.primary,
+  },
+  galleryButtonText: { color: Colors.primary, fontWeight: '600', fontSize: 13 },
   resultBox: {
     marginTop: 18,
     alignItems: 'center',
@@ -331,6 +515,16 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 8,
   },
+  // NEW: AI photo-detection callout
+  aiDetectedBox: {
+    marginTop: 12,
+    backgroundColor: '#e8f0fe',
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    width: '100%',
+  },
+  aiDetectedText: { fontSize: 12, color: Colors.text, textAlign: 'center', fontWeight: '600' },
   waterSourceBox: {
     flexDirection: 'row',
     alignItems: 'flex-start',
