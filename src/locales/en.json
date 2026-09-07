@@ -77,15 +77,27 @@
   "get_prediction": "Get Prediction",
 
   "districts": {
-    "khairpur": "Khairpur",
-    "sukkur": "Sukkur",
-    "multan": "Multan",
-    "bahawalpur": "Bahawalpur",
-    "mardan": "Mardan",
-    "charsadda": "Charsadda",
-    "di_khan": "DI Khan",
-    "swat": "Swat"
-  },
+  "khairpur": "Khairpur",
+  "sukkur": "Sukkur",
+  "multan": "Multan",
+  "bahawalpur": "Bahawalpur",
+  "mardan": "Mardan",
+  "charsadda": "Charsadda",
+  "di_khan": "DI Khan",
+  "swat": "Swat",
+  "lahore": "Lahore",
+  "faisalabad": "Faisalabad",
+  "gujranwala": "Gujranwala",
+  "sialkot": "Sialkot",
+  "sahiwal": "Sahiwal",
+  "rawalpindi": "Rawalpindi",
+  "islamabad": "Islamabad",
+  "peshawar": "Peshawar",
+  "quetta": "Quetta",
+  "karachi": "Karachi",
+  "hyderabad": "Hyderabad",
+  "larkana": "Larkana"
+},
 
   "soil_types": {
     "peaty": "Peaty",
