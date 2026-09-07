@@ -77,15 +77,27 @@
   "get_prediction": "پیش گوئی حاصل کریں",
 
   "districts": {
-    "khairpur": "خیرپور",
-    "sukkur": "سکھر",
-    "multan": "ملتان",
-    "bahawalpur": "بہاولپور",
-    "mardan": "مردان",
-    "charsadda": "چارسدہ",
-    "di_khan": "ڈی آئی خان",
-    "swat": "سوات"
-  },
+  "khairpur": "خیرپور",
+  "sukkur": "سکھر",
+  "multan": "ملتان",
+  "bahawalpur": "بہاولپور",
+  "mardan": "مردان",
+  "charsadda": "چارسدہ",
+  "di_khan": "ڈی آئی خان",
+  "swat": "سوات",
+  "lahore": "لاہور",
+  "faisalabad": "فیصل آباد",
+  "gujranwala": "گوجرانوالہ",
+  "sialkot": "سیالکوٹ",
+  "sahiwal": "ساہیوال",
+  "rawalpindi": "راولپنڈی",
+  "islamabad": "اسلام آباد",
+  "peshawar": "پشاور",
+  "quetta": "کوئٹہ",
+  "karachi": "کراچی",
+  "hyderabad": "حیدرآباد",
+  "larkana": "لاڑکانہ"
+},
 
   "soil_types": {
     "peaty": "پیٹی (دلدلی)",
