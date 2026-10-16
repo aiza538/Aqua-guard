@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: aquaguard-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn "app:create_app()" -b 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///aquaguard.db
+      - key: GEMINI_API_KEY
+        sync: false

@@ -1,7 +1,10 @@
 import axios from "axios";
+import { Platform } from "react-native";
 
-// Apna backend base URL yahan set karein (Dev 2 deploy karega)
-const BASE_URL = "http://10.62.134.208:5000";
+// Web par localhost use hoga, native devices par LAN IP
+const BASE_URL = Platform.OS === "web"
+  ? "http://localhost:5000"
+  : "http://10.160.65.251:5000";
 
 const client = axios.create({
   baseURL: BASE_URL,
